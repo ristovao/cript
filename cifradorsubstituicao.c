@@ -10,13 +10,9 @@ int local(char *alfabeto,char letra){
             return i;                        
     }
     
-    
-    }
-
+}
 
 int main (int argc, char *argv[]){
-
-    
     
     if(argc<3){
                printf("quantidades de arquivos insulficiente\n");
@@ -33,7 +29,6 @@ int main (int argc, char *argv[]){
     char textochave[62];
     char letraclaro;
     char letrachave;
-
     
     int i =0;
     
@@ -62,9 +57,6 @@ int main (int argc, char *argv[]){
         letraclaro = getc(textoclaro);
     }
 
-
-    
-    
     
     fclose(cripto);
     fclose(textoclaro);
