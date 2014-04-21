@@ -22,7 +22,22 @@ void encriptar(char text[]){
 	}
 }
 
-int main (){
+int main (int argc, char *argv[]){
+
+
+    if(argc<3){
+           printf("quantidades de arquivos insulficiente\n");
+           system("pause");
+           return -1;
+    }
+               
+    FILE * cripto;
+    FILE * textoclaro;
+    FILE * chave;
+
+    cripto = fopen("cripto.txt","w");
+    textoclaro = fopen( argv[1] , "r");
+    chave = fopen(  argv[2] , "r");
 
 	char plainText[100];
 	
