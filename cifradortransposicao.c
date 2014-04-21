@@ -22,6 +22,27 @@ void encriptar(char text[]){
 	}
 }
 
+char * encriptarchave(char text[8],int chave[8]){
+	int i;
+	
+	char plain[8];
+
+for(i=0;i<8;i++){
+         plain[i]=text[i];
+       }
+
+   int pos =0;
+		text[pos] = plain[chave[0]];	
+		text[pos+1] = plain[chave[1]];
+		text[pos+2] = plain[chave[2]];
+		text[pos+3] = plain[chave[3]];
+		text[pos+4] = plain[chave[4]];
+		text[pos+5] = plain[chave[5]];
+		text[pos+6] = plain[chave[6]];
+		text[pos+7] = plain[chave[7]];
+  return text;
+}
+
 int main (int argc, char *argv[]){
 
 
@@ -39,18 +60,45 @@ int main (int argc, char *argv[]){
     textoclaro = fopen( argv[1] , "r");
     chave = fopen(  argv[2] , "r");
 
-	char plainText[100];
-	
-	gets(plainText);
-	
-	printf("Plain text: %s\n", plainText);
-	
-	char *cipherText = plainText;
-	
-	encriptar(cipherText);
-	
-	printf("Cipher text: %s", cipherText);
-	
+    int i =0;
+
+    int textochave[8];
+    char letrasclaro[8];
+    char letra='1';
+
+    
+    letra = getc(chave);
+    while(letra != EOF){
+        textochave[i]=atoi(&letra);
+        letra = getc(chave);
+        i++;
+    }
+
+    letra = getc(textoclaro);
+    
+    while(letra != EOF){
+        
+       for(i=0;i<8;i++){
+            letrasclaro[i]=letra;
+            letra = getc(textoclaro);
+       }
+       printf("\n%s",letrasclaro);
+       
+       printf("\n%s\n",encriptarchave(letrasclaro,textochave));
+       
+       for(i=0;i<8;i++){
+         fprintf(cripto,"%c",letrasclaro[i]);
+       }
+      
+    }
+
+
+    fclose(cripto);
+    fclose(textoclaro);
+    fclose(chave);
+
+
+	system("pause");
 	//no linux é outro comando
 	return 0;
 
