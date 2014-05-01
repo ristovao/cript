@@ -22,14 +22,14 @@ for(i=0;i<8;i++){
        }
 
    int pos =0;
-		text[pos] = plain[chave[0]];	
-		text[pos+1] = plain[chave[1]];
-		text[pos+2] = plain[chave[2]];
-		text[pos+3] = plain[chave[3]];
-		text[pos+4] = plain[chave[4]];
-		text[pos+5] = plain[chave[5]];
-		text[pos+6] = plain[chave[6]];
-		text[pos+7] = plain[chave[7]];
+		text[pos] = plain[chave[0]-48];	
+		text[pos+1] = plain[chave[1]-48];
+		text[pos+2] = plain[chave[2]-48];
+		text[pos+3] = plain[chave[3]-48];
+		text[pos+4] = plain[chave[4]-48];
+		text[pos+5] = plain[chave[5]-48];
+		text[pos+6] = plain[chave[6]-48];
+		text[pos+7] = plain[chave[7]-48];
   return text;
 }
 
@@ -81,10 +81,6 @@ int main (int argc, char *argv[]){
 	
 	//PARTE DE TRANSPOSICAO
 
-
-    free(&letraclaro);
-    free(&letrachave);
-
     fclose(cripto);
     fclose(textoclaro);
     fclose(chave);
@@ -104,25 +100,23 @@ int main (int argc, char *argv[]){
     int textochaveTransp[8];
     char letrasClaroTransp[8];
     char letraTransp='1';
+
+    printf("%c %d\n",letraTransp,atoi(&letraTransp));
     letraTransp = getc(chavetransp);
-    printf("\n\n\n");
-    printf("%p %c ",&letraTransp,letraTransp);
-    printf("\n\n\n");
+    
     while(letraTransp != EOF){
-        printf("%c",letraTransp);
-        textochaveTransp[i]=atoi(&letraTransp);
-        printf(" %d \n",textochaveTransp[i]);
+        textochaveTransp[i]=letraTransp;
+        printf("%c %c\n",letraTransp,textochaveTransp[i]);
         letraTransp = getc(chavetransp);
+        
         i++;
     }
+    
     system("pause");
-    printf("\n\n\n");
 
     letraTransp = getc(textoclarotransp);
-    
-    
-     printf("%c",letraTransp);
-     printf("\n\n\n");
+
+     
     while(letraTransp != EOF){
         
        for(i=0;i<8;i++){
@@ -130,8 +124,6 @@ int main (int argc, char *argv[]){
             letraTransp = getc(textoclarotransp);
        }
        printf("\n%s",letrasClaroTransp);
-       for(i=0;i<8;i++)
-       printf("\n%d",textochaveTransp[i]);
         
        printf("\n%s\n",encriptarchave(letrasClaroTransp,textochaveTransp));
        
