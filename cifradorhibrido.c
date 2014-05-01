@@ -35,7 +35,7 @@ for(i=0;i<8;i++){
 
 int main (int argc, char *argv[]){
     
-    if(argc<3){
+    if(argc<4){
                printf("quantidades de arquivos insulficiente\n");
                system("pause");
                return -1;
@@ -45,6 +45,7 @@ int main (int argc, char *argv[]){
     FILE * cripto;
     FILE * textoclaro;
     FILE * chave;
+    
     
     char alfabeto[62] ="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     char textochave[62];
@@ -80,36 +81,58 @@ int main (int argc, char *argv[]){
 	
 	//PARTE DE TRANSPOSICAO
 
+
+    free(&letraclaro);
+    free(&letrachave);
+
+    fclose(cripto);
+    fclose(textoclaro);
+    fclose(chave);
+    
+    FILE * textoclarotransp;    
+    FILE * chavetransp;
 	FILE * saida;
 
-    saida = fopen("cripto.txt","w");
-    textoclaro = fopen( "temp.txt" , "r");
-    chave = fopen(  argv[3] , "r");
 
-    i =0;
+    saida = fopen("cripto.txt","w");
+    
+    textoclarotransp = fopen( "temp.txt" , "r");
+    chavetransp = fopen(  argv[3] , "r");
+
+    i = 0;
 
     int textochaveTransp[8];
     char letrasClaroTransp[8];
     char letraTransp='1';
-
-    
-    letraTransp = getc(chave);
+    letraTransp = getc(chavetransp);
+    printf("\n\n\n");
+    printf("%p %c ",&letraTransp,letraTransp);
+    printf("\n\n\n");
     while(letraTransp != EOF){
+        printf("%c",letraTransp);
         textochaveTransp[i]=atoi(&letraTransp);
-        letraTransp = getc(chave);
+        printf(" %d \n",textochaveTransp[i]);
+        letraTransp = getc(chavetransp);
         i++;
     }
+    system("pause");
+    printf("\n\n\n");
 
-    letraTransp = getc(textoclaro);
+    letraTransp = getc(textoclarotransp);
     
+    
+     printf("%c",letraTransp);
+     printf("\n\n\n");
     while(letraTransp != EOF){
         
        for(i=0;i<8;i++){
             letrasClaroTransp[i]=letraTransp;
-            letraTransp = getc(textoclaro);
+            letraTransp = getc(textoclarotransp);
        }
        printf("\n%s",letrasClaroTransp);
-       
+       for(i=0;i<8;i++)
+       printf("\n%d",textochaveTransp[i]);
+        
        printf("\n%s\n",encriptarchave(letrasClaroTransp,textochaveTransp));
        
        for(i=0;i<8;i++){
@@ -118,7 +141,7 @@ int main (int argc, char *argv[]){
       
     }
     
-    fclose(cripto);
+    
 	fclose(saida);
     fclose(textoclaro);
     fclose(chave);
