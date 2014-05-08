@@ -30,7 +30,9 @@ void percorrer(string cifrado){
 
 	for(unsigned int i = 0; i < possiveisSeguranca.size() ;i++){
             for(unsigned int j = 0; j < possiveisComputador.size() ;j++){
-			if(possiveisComputador[j][4]==possiveisSeguranca[i][3]){
+			if(possiveisComputador[j][4]==possiveisSeguranca[i][3]
+             &&possiveisComputador[j][9]==possiveisSeguranca[i][4]
+             &&possiveisComputador[j][0]==possiveisSeguranca[i][7]){
                     //aqui gerar um alfabeto possivel
                     cout<<"sim"<<endl;
                 }
