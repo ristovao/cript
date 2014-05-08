@@ -11,6 +11,22 @@ int local(char *alfabeto,char letra){
     }
     
 }
+//codigo em c++
+void percorrer(string cifrado){
+	string substring;
+	for(unsigned int i = 0; i < cifrado.length(); i++){
+		substring = substr(i, 10);
+		//checa se a substring pode ser "seguranca"
+		if(substring[6] == substring[9]){
+			//A substring poderia ser "seguranca"
+		}
+		
+		//checa se a substring pode ser "computador"
+		if(substring[1] == substring[8]){
+			//A substring poderia ser "computador"
+		}
+	}
+}
 
 int main (int argc, char *argv[]){
     
