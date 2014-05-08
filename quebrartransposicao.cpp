@@ -43,13 +43,14 @@ string decifrado="";
         decifrado+=(dencriptarchave(substring,i,j,k,l,m,n,o,p));
 
     }
-    cout<<decifrado<<endl;
+    //cout<<decifrado<<endl;
 
-    if((decifrado.find("computador")>0)&&(decifrado.find("seguranca")>0)){
+    if((decifrado.find("computador")!=string::npos)&&(decifrado.find("seguranca")!=string::npos)){
         cout<<"possivel texto decifrado"<<endl;
         cout<<decifrado<<endl;
         cout<<"chave"<<endl;
         cout<<i<<j<<k<<l<<m<<n<<o<<p<<endl;
+		system("pause");
     }
 }
 
