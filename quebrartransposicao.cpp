@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <cstdlib>
 
 using namespace std;
 
@@ -48,9 +47,9 @@ string decifrado="";
     if((decifrado.find("computador")!=string::npos)&&(decifrado.find("seguranca")!=string::npos)){
         cout<<"possivel texto decifrado"<<endl;
         cout<<decifrado<<endl;
-        cout<<"chave"<<endl;
+        cout<<"possivel chave"<<endl;
         cout<<i<<j<<k<<l<<m<<n<<o<<p<<endl;
-		system("pause");
+
     }
 }
 
@@ -108,5 +107,6 @@ int main(){
 	string textoCifrado;
 	getline(cin, textoCifrado);
     percorrer(textoCifrado);
+    cout<<"Terminou"<<endl;
 	return 0;
 }
