@@ -4,12 +4,28 @@
 
 using namespace std;
 
-string decifrar(string cifrado, string chave){
-	string alfabeto = "abcdefghijklmnopqrstuvwxyz";
+string decifrarComUnder(string cifrado, string chave){
+	string alfabeto = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	int pos;
 	for(unsigned int i = 0; i < cifrado.length(); i++){
 		pos = chave.find(cifrado[i]);
-		
+
+		if(pos != string::npos){
+			cifrado[i] = alfabeto[pos];
+		}else
+		if(cifrado[i]!=' '){
+            cifrado[i] = '_';
+		}
+	}
+	return cifrado;
+}
+
+string decifrar(string cifrado, string chave){
+	string alfabeto = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	int pos;
+	for(unsigned int i = 0; i < cifrado.length(); i++){
+		pos = chave.find(cifrado[i]);
+
 		if(pos != string::npos){
 			cifrado[i] = alfabeto[pos];
 		}
@@ -20,7 +36,12 @@ string decifrar(string cifrado, string chave){
 void percorrer(string cifrado){
 	vector<string> possiveisComputador;
 	vector<string> possiveisSeguranca;
+	vector<string> possiveisAlfabetos;
 	string substring;
+
+    string alfabeto = "______________________________________________________________";
+    string normal = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
 	if(cifrado.size()>=10){
         for(unsigned int i = 0; i < cifrado.length()-9; i++){
             substring = cifrado.substr(i, 10);
@@ -40,7 +61,7 @@ void percorrer(string cifrado){
         }
 	}
 
-	string alfabeto = "abcdefghijklmnopqrstuvwxyz";
+
 	string plainText;
 	for(unsigned int i = 0; i < possiveisSeguranca.size() ;i++){
             for(unsigned int j = 0; j < possiveisComputador.size() ;j++){
@@ -61,8 +82,14 @@ void percorrer(string cifrado){
 				alfabeto[19] = possiveisComputador[j][5];
 				alfabeto[20] = possiveisComputador[j][4];
 				plainText = decifrar(cifrado, alfabeto);
+				cout<<"possivel alfabeto"<<endl;
+				cout<<normal<<endl;
+				cout<<alfabeto<<endl;
 				cout << "Texto semi-decifrado: \n" << plainText << endl;
+                plainText = decifrarComUnder(cifrado, alfabeto);
+                cout << plainText << endl;
                 }
+                alfabeto = "______________________________________________________________";
             }
 	}
 
