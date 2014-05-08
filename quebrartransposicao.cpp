@@ -1,38 +1,60 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cstdlib>
+
+using namespace std;
 
 #define BLOCKSIZE 8;
 #define MAXSIZE 100;
 
 
 
-char * dencriptarchave(char text[8],int chave[8]){
-	int i;
+string dencriptarchave(string text,int i,int j,int k,int l,int m,int n,int o,int p){
 
-	char plain[8];
 
-for(i=0;i<8;i++){
-         plain[i]=text[i];
-       }
+	string plain=text;
 
-   int pos =0;
-		text[chave[0]] = plain[pos];
-		text[chave[1]] = plain[pos+1];
-		text[chave[2]] = plain[pos+2];
-		text[chave[3]] = plain[pos+3];
-		text[chave[4]] = plain[pos+4];
-		text[chave[5]] = plain[pos+5];
-		text[chave[6]] = plain[pos+6];
-		text[chave[7]] = plain[pos+7];
+        int pos =0;
+		text[i] = plain[pos];
+		text[j] = plain[pos+1];
+		text[k] = plain[pos+2];
+		text[l] = plain[pos+3];
+		text[m] = plain[pos+4];
+		text[n] = plain[pos+5];
+		text[o] = plain[pos+6];
+		text[p] = plain[pos+7];
+
   return text;
+}
+
+
+void decifra(string textocifrado,int i,int j,int k,int l,int m,int n,int o,int p){
+
+string substring;
+string decifrado="";
+
+    int temp;
+
+
+
+    for(int tamanho =0; tamanho < textocifrado.length();tamanho=tamanho+8){
+        substring=textocifrado.substr(tamanho,8);
+        decifrado+=(dencriptarchave(substring,i,j,k,l,m,n,o,p));
+
+    }
+    cout<<decifrado<<endl;
+
+    if((decifrado.find("computador")>0)&&(decifrado.find("seguranca")>0)){
+        cout<<"possivel texto decifrado"<<endl;
+        cout<<decifrado<<endl;
+        cout<<"chave"<<endl;
+        cout<<i<<j<<k<<l<<m<<n<<o<<p<<endl;
+    }
 }
 
 void percorrer(string cifrado){
 
-	vector<string> possiveisChaves;
-	string substring;
-	string decifrado;
 	for (int i=0;i<8;i++)
     for (int j=0;j<8;j++)
     for (int k=0;k<8;k++)
@@ -70,11 +92,10 @@ void percorrer(string cifrado){
     && n!=p
     && o!=p ){
 
-    for(int tamanho =0; tamanho < cifrado.size();tamanho+=180)
-    substring = cifrado.substr(i, 8);
+
+    decifra(cifrado,i,j,k,l,m,n,o,p);
 
 
-    //printf("%d,%d,%d,%d,%d,%d,%d,%d\n", i , j , k,l,m,n,o,p);
 
     }
 
@@ -85,6 +106,6 @@ void percorrer(string cifrado){
 int main(){
 	string textoCifrado;
 	getline(cin, textoCifrado);
-	percorrer(textoCifrado);
+    percorrer(textoCifrado);
 	return 0;
 }
