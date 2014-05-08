@@ -4,6 +4,19 @@
 
 using namespace std;
 
+string decifrar(string cifrado, string chave){
+	string alfabeto = "abcdefghijklmnopqrstuvwxyz";
+	int pos;
+	for(unsigned int i = 0; i < cifrado.length(); i++){
+		pos = chave.find(cifrado[i]);
+		
+		if(pos != string::npos){
+			cifrado[i] = alfabeto[pos];
+		}
+	}
+	return cifrado;
+}
+
 void percorrer(string cifrado){
 	vector<string> possiveisComputador;
 	vector<string> possiveisSeguranca;
@@ -27,15 +40,28 @@ void percorrer(string cifrado){
         }
 	}
 
-
+	string alfabeto = "abcdefghijklmnopqrstuvwxyz";
+	string plainText;
 	for(unsigned int i = 0; i < possiveisSeguranca.size() ;i++){
             for(unsigned int j = 0; j < possiveisComputador.size() ;j++){
 			if(possiveisComputador[j][4]==possiveisSeguranca[i][3]
              &&possiveisComputador[j][9]==possiveisSeguranca[i][4]
-             &&possiveisComputador[j][6]==possiveisSeguranca[i][5]
              &&possiveisComputador[j][0]==possiveisSeguranca[i][7]){
-                    //aqui gerar um alfabeto possivel
-                    cout<<"sim"<<endl;
+				alfabeto[0] = possiveisSeguranca[i][5];
+				alfabeto[2] = possiveisSeguranca[i][7];
+				alfabeto[3] = possiveisComputador[j][7];
+				alfabeto[4] = possiveisSeguranca[i][1];
+				alfabeto[6] = possiveisSeguranca[i][2];
+				alfabeto[12] = possiveisComputador[j][2];
+				alfabeto[13] = possiveisSeguranca[i][6];
+				alfabeto[14] = possiveisComputador[j][1];
+				alfabeto[15] = possiveisComputador[j][3];
+				alfabeto[17] = possiveisComputador[j][9];
+				alfabeto[18] = possiveisSeguranca[i][0];
+				alfabeto[19] = possiveisComputador[j][5];
+				alfabeto[20] = possiveisComputador[j][4];
+				plainText = decifrar(cifrado, alfabeto);
+				cout << "Texto semi-decifrado: \n" << plainText << endl;
                 }
             }
 	}
